@@ -2,7 +2,7 @@
 
 [![NPM Package](https://img.shields.io/npm/v/bvckup2.svg?style=flat-square)](https://www.npmjs.org/package/bvckup2)
 
-A simple module for using the Bvckup2 Dashboard API.
+A simple module for using the [Bvckup2 Dashboard API](https://bvckup2.com/customer/api/).
 
 Install using `npm install --save bvckup2` or clone the repo
 
