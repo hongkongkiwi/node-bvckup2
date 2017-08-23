@@ -1,0 +1,35 @@
+{
+  "name": "bvckup2",
+  "version": "0.0.1",
+  "description": "Unofficial library to work with the Bvcup2 API",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/callback"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hongkongkiwi/node-bvckup2.git"
+  },
+  "keywords": [
+    "bvckup2",
+    "bvckup",
+    "backup"
+  ],
+  "author": {
+    "name": "Andy Savage",
+    "email": "andy@savage.hk",
+    "url": "http://www.github.com/hongkongkiwi"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hongkongkiwi/node-bvckup2/issues"
+  },
+  "homepage": "https://github.com/hongkongkiwi/node-bvckup2#readme",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "http-errors": "^1.6.2",
+    "node-error-classes": "^2.0.1",
+    "request": "^2.81.0",
+    "underscore": "^1.8.3"
+  }
+}
