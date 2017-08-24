@@ -4,7 +4,7 @@
   "description": "Unofficial library to work with the Bvcup2 API",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/callback"
+    "test": "node tests/callbacks"
   },
   "repository": {
     "type": "git",

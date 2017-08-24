@@ -43,25 +43,28 @@ class Bvckup2 {
   }
 
   // Just a helper function so we can change the way all requests are done later
-  _r(url, cb) {
-    const params = {
+  _r(params, cb) {
+    request(_.extend({
       auth: {
         user: this.apiKey,
         sendImmediately: true
       },
       json: true,
-      url: url
-    }
-    request(params, cb);
+      method: 'GET'
+    }, params), cb);
   }
 
   listAllLicenses(options, cb) {
+    // Sets default values if options is not passed
     options = _.extend({
+      object: 'list',
       start: 0,
       limit: 1000
     }, options);
-    const url = util.format('%s/%s', this.baseUrl, 'licenses');
-    this._r(url, (err, response, body) => {
+    const params = {
+      url: util.format('%s/%s?start=%d&limit=%d&object=%s', this.baseUrl, 'licenses', options.start, options.limit, options.object)
+    };
+    this._r(params, (err, response, body) => {
       if (response.statusCode < 200 || response.statusCode >= 300) {
         return cb(httpError(response.statusCode, body));
       } else if (err) {
@@ -79,8 +82,10 @@ class Bvckup2 {
     } else if (!_.isString(licenseId)) {
       return cb(invalidParamError('licenseId', 'should be a string.', typeof licenseId));
     }
-    const url = util.format('%s/%s/%s', this.baseUrl, 'licenses', licenseId);
-    this._r(url, (err, response, body) => {
+    const params = {
+      url: util.format('%s/%s/%s', this.baseUrl, 'licenses', licenseId)
+    };
+    this._r(params, (err, response, body) => {
       if (response.statusCode < 200 || response.statusCode >= 300) {
         return cb(httpError(response.statusCode, body));
       } else if (err) {
