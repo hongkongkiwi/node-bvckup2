@@ -1,10 +1,11 @@
 {
   "name": "bvckup2",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Unofficial library to work with the Bvcup2 API",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/callbacks"
+    "test": "echo 'No Tests Available' && exit 0",
+    "example": "node tests/callbacks"
   },
   "repository": {
     "type": "git",

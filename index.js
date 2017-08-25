@@ -37,21 +37,26 @@ class Bvckup2 {
     this.options = _.extend({
       protocol: 'https',
       host: 'bvckup2.com',
-      basePath: 'customer/api'
+      basePath: 'customer/api',
+      requestOptions: {
+        timeout: 2000,
+        gzip: true
+      }
     }, options);
     this.baseUrl = util.format('%s://%s/%s', this.options.protocol, this.options.host, this.options.basePath);
   }
 
   // Just a helper function so we can change the way all requests are done later
   _r(params, cb) {
-    request(_.extend({
+    params = _.extend(_.extend({
       auth: {
         user: this.apiKey,
         sendImmediately: true
       },
       json: true,
-      method: 'GET'
-    }, params), cb);
+      method: 'GET',
+    }, params), this.options.requestOptions);
+    request(params, cb);
   }
 
   listAllLicenses(options, cb) {
@@ -65,10 +70,10 @@ class Bvckup2 {
       url: util.format('%s/%s?start=%d&limit=%d&object=%s', this.baseUrl, 'licenses', options.start, options.limit, options.object)
     };
     this._r(params, (err, response, body) => {
-      if (response.statusCode < 200 || response.statusCode >= 300) {
-        return cb(httpError(response.statusCode, body));
-      } else if (err) {
+      if (err) {
         return cb(err);
+      } else if (response.statusCode < 200 || response.statusCode >= 300) {
+        return cb(httpError(response.statusCode, body));
       }
       cb(null, body.data, body.has_more);
     });
@@ -86,10 +91,11 @@ class Bvckup2 {
       url: util.format('%s/%s/%s', this.baseUrl, 'licenses', licenseId)
     };
     this._r(params, (err, response, body) => {
-      if (response.statusCode < 200 || response.statusCode >= 300) {
-        return cb(httpError(response.statusCode, body));
-      } else if (err) {
+      if (err) {
         return cb(err);
+      } else if (response.statusCode < 200 || response.statusCode >= 300) {
+        return cb(httpError(response.statusCode, body));
+
       }
       cb(null, body[0]);
     });
